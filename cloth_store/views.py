@@ -11,8 +11,8 @@ class ShowAllProductViewset(viewsets.ModelViewSet):
 
     def get_queryset(self): 
         queryset = super().get_queryset()
-        user_slug = self.kwargs.get('category_slug')
+        user_slug = self.request.query_params.get('category_slug')
         if user_slug:
-            category = Category.objects.get(slug = user_slug)
-            return Product.objects.filter(category = category)
+            queryset = queryset.filter(category_id = user_slug)
+            
         return  queryset

@@ -4,10 +4,12 @@ from django.contrib.auth.models import User
 from .constraints import STAR_CHOICES,SIZE
 
 class ProductSerializer(serializers.ModelSerializer):
+    size = serializers.MultipleChoiceField(choices = SIZE)
     class Meta:
         
         model = Product
         fields = ['id','name','category','image','price','quantity','description','size']
+        
 
 class WishlistSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(many=False)

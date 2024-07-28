@@ -12,8 +12,8 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2,max_digits=10)
     quantity = models.IntegerField()
     description = models.TextField()
-    size = models.CharField(max_length=100,choices=SIZE,null=True,blank=True)
-     
+    size = models.CharField(max_length=100,null=True,blank=True)
+    
     def __str__(self) -> str:
         return f" Product : {self.name} , Category: {self.category.name}"
 

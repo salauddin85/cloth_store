@@ -10,8 +10,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('auth_app.urls')),
-    path('category_product/<slug:category_slug>',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
+    path('auth/', include('auth_app.urls')),
+    path('',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
     path('products/',include("cloth_product.urls")),
     path('categories/',include("cloth_category.urls")),
     path('purchases/',include("Purchase.urls")),
@@ -23,3 +23,5 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+# category_product/<slug:category_slug>
