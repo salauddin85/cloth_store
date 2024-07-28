@@ -1,15 +1,20 @@
 from django.contrib import admin
+from .models import Account
+# # # Register your models here.
 
-# Register your models here.
-from .import models 
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['first_name','last_name','email','mobaile_no']
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'email', 'account_no', 'balance', 'created_on']
 
-    def first_name(self,obj):
+    def first_name(self, obj):
         return obj.user.first_name
-    def last_name(self,obj):
+
+    def last_name(self, obj):
         return obj.user.last_name
-    
-    def email(self,obj):
+
+    def email(self, obj):
         return obj.user.email
-admin.site.register(models.Customer,CustomerAdmin)
+
+            
+admin.site.register(Account, AccountAdmin)
+
+# admin.site.register(Account)

@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # CSRF_TRUSTED_ORIGINS = ['https://cloth-store-hipo.onrender.com']
-CSRF_TRUSTED_ORIGINS = ["https://cloth-store-hipo.onrender.com","https://*.127.0.0.1"] # new
+# CSRF_TRUSTED_ORIGINS = ["https://cloth-store-hipo.onrender.com","https://*.127.0.0.1"] # new
 
 
 
@@ -50,6 +50,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'auth_app',
+    'cloth_category',
+    'cloth_product',
+    'account',
+    'Purchase',
+    'Transactions',
+   
 ]
 
 MIDDLEWARE = [
@@ -135,11 +141,14 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 REST_FRAMEWORK = {
     
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
      
 }
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
