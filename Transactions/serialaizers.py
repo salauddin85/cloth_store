@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import TransactionsModel
 class DepositSerializer(serializers.ModelSerializer):
     class Meta:

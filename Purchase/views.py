@@ -7,10 +7,12 @@ from .models import PurchaseModel
 from .serialaizers import PurchaseSerializer
 from cloth_product.models import Product
 from auth_app.models import Account
+from rest_framework.permissions import IsAuthenticated
 
 class PurchaseProductView(viewsets.ModelViewSet):
     queryset = PurchaseModel.objects.all()
     serializer_class = PurchaseSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return PurchaseModel.objects.all()
@@ -45,6 +47,6 @@ class PurchaseProductView(viewsets.ModelViewSet):
                 product=product,
             )
         else:
-            return Response({'error': "You Cannot Purchase"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': "You Cannot Purchase for your balance and product not sufficient"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)

@@ -9,13 +9,14 @@ from rest_framework.response import Response
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from rest_framework.views import APIView
-
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 
 class DepositView(APIView):
     model = TransactionsModel
     serializer_class = DepositSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_initial(self):
         initial = {'transaction_type': DEPOSIT}
