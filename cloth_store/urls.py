@@ -11,7 +11,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('auth_app.urls')),
-    path('',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
+    path('all_products/',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
     path('products/',include("cloth_product.urls")),
     path('categories/',include("cloth_category.urls")),
     path('purchases/',include("Purchase.urls")),
