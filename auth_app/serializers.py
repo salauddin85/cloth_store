@@ -7,6 +7,7 @@ from rest_framework.permissions import BasePermission
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from .models import Account
 
 class UserRegistrationSerialaizer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
@@ -16,6 +17,7 @@ class UserRegistrationSerialaizer(serializers.ModelSerializer):
         fields = ['username','first_name','last_name', 'password', 'email', 'confirm_password']
         extra_kwargs = {'password': {'write_only': True}}
 
+    
     def validate(self, data):
         email = data['email']
         if data['password'] != data['confirm_password']:
@@ -33,7 +35,13 @@ class UserRegistrationSerialaizer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password']
         )
+        Account.objects.create(
+                user = user,
+                account_no = 100000+user.id
+            )
         return user
+    
+
 
 
 class UserLoginSerializer(serializers.Serializer):

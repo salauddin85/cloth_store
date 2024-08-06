@@ -12,14 +12,16 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2,max_digits=10)
     quantity = models.IntegerField()
     description = models.TextField()
-    size = models.CharField(max_length=100,null=True,blank=True)
+    size = models.CharField(max_length=100,null=True,blank=True,choices=SIZE)
+    
+
     
     def __str__(self) -> str:
         return f" Product : {self.name} , Category: {self.category.name}"
 
 class Wishlist (models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    product = models.ManyToManyField(Product,blank=True)
+    products = models.ManyToManyField(Product,blank=True)
 
     # def __str__(self) -> str:
     #     return f"{self.user.usfirst_name}{self.user.last_name} {self.product.name} "

@@ -6,8 +6,10 @@ from .constants import TRANSACTION_TYPE, DEPOSIT
 
 from auth_app.models import Account
 from rest_framework.response import Response
+
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
@@ -43,10 +45,10 @@ class DepositView(APIView):
 
             email_subject = "Deposit Confirmation"
             email_body = render_to_string("deposit_email.html", {
-                'user' : requested_user,
+                'user' : self.request.user,
                 'amount' : amount,
             })
-            email = EmailMultiAlternatives(email_subject,'',to = [requested_user.email])
+            email = EmailMultiAlternatives(email_subject,'',to = [request.user.email])
             email.attach_alternative(email_body,'text/html')
             email.send()
 

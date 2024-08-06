@@ -7,46 +7,66 @@ from .models import PurchaseModel
 from .serialaizers import PurchaseSerializer
 from cloth_product.models import Product
 from auth_app.models import Account
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,IsAuthenticatedOrReadOnly
+from rest_framework.views import APIView
 
-class PurchaseProductView(viewsets.ModelViewSet):
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+
+
+
+
+class PurchaseProductView(APIView):
     queryset = PurchaseModel.objects.all()
     serializer_class = PurchaseSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return PurchaseModel.objects.all()
 
-    # @action(detail=False, methods=['post'], url_path='purchase')
-    def purchase_product(self, request):
-        product_id = request.data.get('product_id')
-        
-        if not product_id:
+    # PURCHASE PART:
+    #jokon akjon user purchase korbe thokon akta post request asbe purchase ar jonno ajonno amra custom action use korlam amader moto  details false mane ata akta list action jeta kunu specific item ar jonno noy.
+    @action(detail=False, methods=['post'], url_path='purchase')
+    def post(self, request,id):
+        print("product",id)
+        if not id:
             return Response({'error': "No product id found"}, status=status.HTTP_400_BAD_REQUEST)
+  
+        product = get_object_or_404(Product, id=id)
+        print(product)
 
-        # Retrieve the product
-        product = get_object_or_404(Product, id=product_id)
-
-        # Retrieve the requested user account
         try:
             requested_user = Account.objects.get(user=self.request.user)
         except Account.DoesNotExist:
             return Response({'error': "No Account Match"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Perform purchase logic
-        if requested_user.balance > product.price and product.quantity > 0:
+        print(requested_user.balance)
+        if requested_user.balance >= product.price and product.quantity > 0:
+            print(requested_user.balance)
             requested_user.balance -= product.price
             product.quantity -= 1
+            print(product.quantity)
             requested_user.save()
             product.save()
 
+            # EMAIL PART:
+
+            email_subject = "Purchase Confirmations"
+            email_body = render_to_string("purchase_email.html",{
+                'user':self.request.user,
+                'price':product.price,
+                'product':product,
+                'balance':requested_user.balance
+            })
+            email = EmailMultiAlternatives(email_subject,'',to = [request.user.email])
+            email.attach_alternative(email_body,'text/html')
+            email.send()
+
+            
             # Create purchase record
             PurchaseModel.objects.create(
                 user=self.request.user,
-                account=requested_user,
                 product=product,
             )
+            return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
         else:
-            return Response({'error': "You Cannot Purchase for your balance and product not sufficient"}, status=status.HTTP_400_BAD_REQUEST)
-
-        return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
+            return Response({'error': "Insufficient balance or product quantity"}, status=status.HTTP_400_BAD_REQUEST)

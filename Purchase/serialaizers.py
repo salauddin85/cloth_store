@@ -5,4 +5,4 @@ from .models import PurchaseModel
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseModel
-        fields = '__all__'
+        fields = ['user']

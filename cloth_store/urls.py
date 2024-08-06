@@ -11,11 +11,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('auth_app.urls')),
-    path('all_products/',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
+    path('category_products/',ShowAllProductViewset.as_view({'get': 'list'}), name='category_wise_product'),
     path('products/',include("cloth_product.urls")),
     path('categories/',include("cloth_category.urls")),
     path('purchases/',include("Purchase.urls")),
     path('transactions/',include("Transactions.urls")),
+    path('api-auth/',include("rest_framework.urls")),
     # path('accounts/',include("account.urls")),
 
     

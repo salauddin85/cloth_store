@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'auth_app',
     'cloth_category',
     'cloth_product',
-    'account',
     'Purchase',
     'Transactions',
    

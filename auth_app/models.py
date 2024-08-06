@@ -11,8 +11,3 @@ class Account(models.Model):
 
     def __str__(self) :
         return f"{self.user.first_name} {self.user.last_name}  {self.account_no} "
-
-    # def save(self, *args, **kwargs):
-    #     if not self.account_no:
-    #         self.account_no = Account.objects.count() + 1  # simplistic auto account number
-    #     super().save(*args, **kwargs)
