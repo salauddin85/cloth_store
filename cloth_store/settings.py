@@ -29,8 +29,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['https://cloth-store-1.onrender.com', '0.0.0.0', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://cloth-store-1.onrender.com']
+ALLOWED_HOSTS = ['https://cloth-store-hipo.onrender.com', '0.0.0.0', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://cloth-store-hipo.onrender.com']
 # CSRF_TRUSTED_ORIGINS = ["https://cloth-store-hipo.onrender.com","https://*.127.0.0.1"] # new
 
 
