@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://cloth-store-hipo.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://cloth-store-1.onrender.com']
 # CSRF_TRUSTED_ORIGINS = ["https://cloth-store-hipo.onrender.com","https://*.127.0.0.1"] # new
 
 
