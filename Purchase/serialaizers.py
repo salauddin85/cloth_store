@@ -5,4 +5,6 @@ from .models import PurchaseModel
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseModel
-        fields = ['user']
+        fields = ['']
+        # fields = ['product']
+        

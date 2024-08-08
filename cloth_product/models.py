@@ -14,6 +14,7 @@ class Product(models.Model):
     description = models.TextField()
     size = models.CharField(max_length=100,null=True,blank=True,choices=SIZE)
     
+    
 
     
     def __str__(self) -> str:

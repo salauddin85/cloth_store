@@ -19,7 +19,7 @@ class ProductViewset(viewsets.ModelViewSet):
 
    
     
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get'],url_path='sorted_by_size/(?P<size>[^/.]+)')
     def sorted_by_size(self, request,size):
         
         if any(size == s[0] for s in SIZE):
@@ -36,7 +36,7 @@ class ProductViewset(viewsets.ModelViewSet):
 
     
     @action(detail=False, methods=['get'])
-    def sort_by_price(self, request):
+    def sorted_by_price(self, request):
         sort_order = request.query_params.get('order', 'asc')
         if sort_order == 'asc':
             products = Product.objects.all().order_by('price')
