@@ -100,3 +100,7 @@ class ReviewViewset(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+    def perform_create(self, serializer):
+        serializer.save(reviewer=self.request.user)
