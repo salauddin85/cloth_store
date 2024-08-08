@@ -29,8 +29,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://cloth-store-hipo.onrender.com']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://cloth-store-mym7.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://cloth-store-mym7.onrender.com']
 # CSRF_TRUSTED_ORIGINS = ["https://cloth-store-hipo.onrender.com","https://*.127.0.0.1"] # new
 
 
@@ -154,3 +155,69 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #added for cors policy -> first install: pip install django-cors-headers. then add this
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:5500/','http://127.0.0.1:8000/','https://*.127.0.0.1']
+# # Application definition
+
+# INSTALLED_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     'rest_framework',
+#     'rest_framework.authtoken',
+
+#     #added for cors policy -> first install: pip install django-cors-headers. then add this
+#     'corsheaders'
+# ]
+
+# CORS_ALLOW_METHODS = (
+#     "DELETE",
+#     "GET",
+#     "OPTIONS",
+#     "PATCH",
+#     "POST",
+#     "PUT",
+# )
+ 
+# MIDDLEWARE = [
+#     'django.middleware.security.SecurityMiddleware',
+#     'django.contrib.sessions.middleware.SessionMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     'django.middleware.csrf.CsrfViewMiddleware',
+#     'django.contrib.auth.middleware.AuthenticationMiddleware',
+#     'django.contrib.messages.middleware.MessageMiddleware',
+#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+#     # added for cors policy
+#     'corsheaders.middleware.CorsMiddleware',
+#     'django.middleware.common.CommonMiddleware',
+#     ]
