@@ -24,4 +24,4 @@ sqlparse
 typing_extensions
 tzdata
 wheel
-sqlite3=3.45.1
+sqlite3==3.45.1
